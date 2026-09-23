@@ -1,0 +1,20 @@
+/* Global styles for elementar-rt-minimalistic.
+   The elementar-rt default theme wires Angular Material 3 theming, Tailwind v4,
+   the full CSS-variable design-token set, and dark mode (via the `html.dark` class). */
+@use '@elementar-rt/components/styles/themes/default';
+
+/* Ensure Tailwind scans this app's own templates for utility classes. */
+@source './app';
+@source './index.html';
+
+
+/* Keyboard focus ring.
+   Angular Material brings its own, but this app uses plain <button>/<a> for
+   chips, toggles, cards, and list rows. `:focus-visible` keeps the ring off
+   mouse clicks, and `:where()` keeps specificity at zero so any component can
+   override it. */
+:where(a, button, summary, [role='switch'], [role='button'], [tabindex]):focus-visible {
+  outline: 2px solid var(--color-primary, currentColor);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
