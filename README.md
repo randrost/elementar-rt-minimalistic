@@ -80,9 +80,11 @@ docker build -t elementar-rt-minimalistic .
 docker run -p 8080:80 elementar-rt-minimalistic
 ```
 
-`manifest.yaml` deploys it to Kubernetes behind an nginx ingress with
-cert-manager TLS, and `Jenkinsfile` builds and pushes the image on every push
-to the default branch — adjust or remove both if you don't need them.
+The Kubernetes manifest (nginx ingress, cert-manager TLS) lives in
+[`tls-infra`](https://github.com/randrost/tls-infra) (private), not in this
+repo — `Jenkinsfile` builds, pushes, and deploys from there on every push to
+the default branch. Remove the Deploy stage from `Jenkinsfile` if you fork
+this and don't want that.
 
 Because it is a SPA, the nginx config falls back to `index.html` for unknown
 paths — without that, a refresh on any deep link would 404.
